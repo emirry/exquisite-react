@@ -30,7 +30,8 @@ const Game = () => {
   const addSubmissionInput = (input) => {
     const newFormValues = [...submission];
 
-    const nextPlayer = Math.max(currentPlayer.map((player) => player.id)) + 1;
+    const nextPlayer = currentPlayer + 1;
+    console.log(nextPlayer)
 
     newFormValues.push({
       ...input,    

@@ -35,15 +35,17 @@ import './PlayerSubmissionForm.css';
 
 const PlayerSubmissionForm = (props) => {
   const [inputFields, setInputFields] = useState({
-    adj1: '',
-    noun1: '',
-    adv: '',
-    verb: '',
-    adj2: '',
-    noun2: '',
+    adj1: 'goofy',
+    noun1: 'golden retriever',
+    adv: 'quickly',
+    verb: 'ate',
+    adj2: 'crunchy',
+    noun2: 'broccoli',
   });
 
+
   const onInputChange = (event) => {
+
     const {name, value} = event.target;
 
     const newFormFieldValues = {
@@ -71,8 +73,8 @@ const PlayerSubmissionForm = (props) => {
   };
 
   return (
-    <div className="PlayerSubmissionForm">
-      <h3>Player Submission Form for Player #{  }</h3>
+    <div className="PlayerSubmissionForm" onSubmit={onFormSubmit}>
+      <h3>Player Submission Form for Player #{ props.onCurrentPlayer }</h3>
 
       <form className="PlayerSubmissionForm__form" >
 

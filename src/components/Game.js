@@ -5,6 +5,9 @@ import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
+  const [formInput, setFormInput] = useState(FIELDS);
+  const [currentPlayer, setCurrentPlayer] = useState(1);
+
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
       return field.placeholder;
@@ -12,6 +15,20 @@ const Game = () => {
       return field;
     }
   }).join(' ');
+
+  const addFormInput = (input) => {
+    const newFormValues = [...FIELDS];
+
+    const newValues = Math.max(...newFormValues.map((input) => input.id)) +1;
+
+    newFormValues.push({
+      ...input,
+      updatedInput: newValues,
+    })
+
+    setFormInput(newFormValues);
+  };
+
 
   return (
     <div className="Game">
@@ -27,7 +44,7 @@ const Game = () => {
 
       <RecentSubmission />
 
-      <PlayerSubmissionForm />
+      <PlayerSubmissionForm onSubmitCallback={addFormInput}/>
 
       <FinalPoem />
 

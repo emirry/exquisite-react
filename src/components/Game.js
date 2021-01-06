@@ -8,6 +8,7 @@ const Game = () => {
   const [submission, setSubmission] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
   // console.log(submission)
+ const [isSubmitted, setIsSubmitted] = useState(false);
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -17,18 +18,8 @@ const Game = () => {
     }
   }).join(' ');
 
-  const updatePoem = (updatedPoem) => {
-    const newFormValues = [];
-
-    submission.forEach((input) => {
-      if (input.key) {
-        return input.placeholder;
-      }
-      else {
-        newFormValues.push(input);
-      }
-    })
-    setSubmission(newFormValues);
+  const revealPoem = () => {
+    setIsSubmitted(true);
   };
 
   const addSubmissionInput = (input) => {
@@ -42,7 +33,6 @@ const Game = () => {
     });
     setSubmission(newFormValues);
     setCurrentPlayer(nextPlayer);
-
   };
 
 
@@ -59,10 +49,10 @@ const Game = () => {
       </p>
 
       <RecentSubmission />
-
+      
       <PlayerSubmissionForm sendSubmission={addSubmissionInput} index={currentPlayer} fields={FIELDS} />
 
-      <FinalPoem submission={submission}  onUpdatePoem={updatePoem} />
+      <FinalPoem isSubmitted={isSubmitted} submissions={submission} revealPoem={revealPoem} />
 
     </div>
   );

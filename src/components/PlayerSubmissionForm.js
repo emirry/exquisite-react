@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Game from './Game';
 import './PlayerSubmissionForm.css';
 
-const PlayerSubmissionForm = (props) => {
+const PlayerSubmissionForm = ({sendSubmission, index}) => {
   const [inputFields, setInputFields] = useState({
     adj1: '',
     noun1: '',
@@ -12,6 +12,7 @@ const PlayerSubmissionForm = (props) => {
     adj2: '',
     noun2: '',
   });
+
   const onInputChange = (event) => {
     const {name, value} = event.target;
 
@@ -22,11 +23,10 @@ const PlayerSubmissionForm = (props) => {
     setInputFields(newFormFieldValues);
   };
 
-
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    props.sendSubmission(inputFields)
+    sendSubmission(inputFields)
 
     setInputFields({
       adj1: '',
@@ -35,13 +35,13 @@ const PlayerSubmissionForm = (props) => {
       verb: '',
       adj2: '',
       noun2: '',
-
     });
+
   };
 
   return (
     <div className="PlayerSubmissionForm" onSubmit={onFormSubmit}>
-      <h3>Player Submission Form for Player #{ props.index }</h3>
+      <h3>Player Submission Form for Player #{ index }</h3>
 
       <form className="PlayerSubmissionForm__form" >
 

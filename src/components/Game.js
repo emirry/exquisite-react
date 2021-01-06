@@ -8,16 +8,6 @@ const Game = () => {
   const [submission, setSubmission] = useState(FIELDS);
   const [currentPlayer, setCurrentPlayer] = useState(1);
 
-  // const switchPlayer = () => {
-  //   if (currentPlayer === 1) {
-
-  //     setCurrentPlayer(+1)
-  //   }
-  //   else {
-  //     setCurrentPlayer(1)
-  //   }
-  // }
-
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
       return field.placeholder;
@@ -25,7 +15,6 @@ const Game = () => {
       return field;
     }
   }).join(' ');
-
 
   const addSubmissionInput = (input) => {
     const newFormValues = [...submission];
@@ -38,7 +27,14 @@ const Game = () => {
     });
     setCurrentPlayer(nextPlayer);
     setSubmission(newFormValues);
+  };
 
+  const updatePoem = (updatedPoem) => {
+    const newFormValues = [];
+
+    newFormValues.push(updatedPoem);
+
+    setSubmission(newFormValues);
   };
 
 
@@ -54,11 +50,11 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission submission={submission} />
+      <RecentSubmission  />
 
       <PlayerSubmissionForm onSubmitCallback={addSubmissionInput} onCurrentPlayer={currentPlayer} />
 
-      <FinalPoem />
+      <FinalPoem submission={submission} onUpdateSubmission={updatePoem}/>
 
     </div>
   );

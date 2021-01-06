@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Game from './Game';
 import './PlayerSubmissionForm.css';
 
-const PlayerSubmissionForm = ({sendSubmission, index}) => {
+const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
   const [inputFields, setInputFields] = useState({
     adj1: '',
     noun1: '',
@@ -26,7 +26,17 @@ const PlayerSubmissionForm = ({sendSubmission, index}) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    sendSubmission(inputFields)
+    const poem = fields.map(field => {
+      const submittedFields = {...inputFields};
+      if (field.key) {
+        return submittedFields[field.key]
+      }
+      else {
+        return field
+      }
+    }).join(' ');
+
+    sendSubmission(poem);
 
     setInputFields({
       adj1: '',
@@ -36,7 +46,6 @@ const PlayerSubmissionForm = ({sendSubmission, index}) => {
       adj2: '',
       noun2: '',
     });
-
   };
 
   return (
@@ -96,6 +105,7 @@ const PlayerSubmissionForm = ({sendSubmission, index}) => {
             placeholder="hm..."
             type="text" 
           /> */}
+          <h3>.</h3>
 
         </div>
 

@@ -18,23 +18,23 @@ const Game = () => {
     }
   }).join(' ');
 
-  const revealPoem = () => {
-    setIsSubmitted(true);
-  };
-
   const addSubmissionInput = (input) => {
     const newFormValues = [...submission];
 
     const nextPlayer = currentPlayer + 1;
     // console.log(nextPlayer)
 
-    newFormValues.push({
-      ...input,    
-    });
+    newFormValues.push(input);
+
     setSubmission(newFormValues);
     setCurrentPlayer(nextPlayer);
   };
 
+  const revealLastSubmission = submission[submission.length - 1]
+
+  const revealPoem = () => {
+    setIsSubmitted(true);
+  };
 
   return (
     <div className="Game">
@@ -48,9 +48,9 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission />
+      <RecentSubmission submission={revealLastSubmission} />
       
-      <PlayerSubmissionForm sendSubmission={addSubmissionInput} index={currentPlayer} fields={FIELDS} />
+      <PlayerSubmissionForm sendSubmission={addSubmissionInput} index={currentPlayer} fields={FIELDS} /> 
 
       <FinalPoem isSubmitted={isSubmitted} submissions={submission} revealPoem={revealPoem} />
 

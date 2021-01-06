@@ -4,31 +4,42 @@ import './FinalPoem.css';
 import Game from './Game';
 
 const FinalPoem = (props) => {
-  const allSubmissions = props.submission.map((playerSubmission, i) => {
-    return (
-      <li key={i}>
-      {/* <Game
-        adj1={playerSubmission.adj1}
-        noun1={playerSubmission.noun1}
-        adv={playerSubmission.adv}
-        verb={playerSubmission.verb}
-        adj2={playerSubmission.adj2}
-        noun2={playerSubmission.adj2} */}
-        onUpdatePoem={props.onUpdatePoem}
-      {/* /> */}
-      </li>
-    )
-  })
+  const onButtonClick = () => {
+    const allSubmissions = {
+      adj1: props.adj1,
+      noun1: props.noun1,
+      adv: props.adv,
+      verb: props.verb,
+      adj2: props.adj2,
+      noun2: props.noun2
+    }
+    props.onUpdatePoem(allSubmissions);
+    console.log(allSubmissions)
+  }
+
+  // const onPlayerChange = (event, currentPlayer) => {
+  //   const updatedPlayer = {
+  //    const currentPlayer = event.target.value;
+  //    props.onUpdatePoem({
+  //     adj1: props.adj1,
+  //     noun1: props.noun1,
+  //     adv: props.adv,
+  //     verb: props.verb,
+  //     adj2: props.adj2,
+  //     noun2: props.noun2
+  //    })
+
+  //   }
+  // }
 
   return (
     <div className="FinalPoem">
       <section className="FinalPoem__poem">
         <h3>Final Poem</h3>
-        {allSubmissions}
       </section>
 
       <div className="FinalPoem__reveal-btn-container">
-        <input type="button" value="We are finished: Reveal the Poem" className="FinalPoem__reveal-btn" />
+        <input onClick={onButtonClick} type="button" value="We are finished: Reveal the Poem" className="FinalPoem__reveal-btn" />
       </div>
     </div>
   );

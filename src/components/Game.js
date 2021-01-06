@@ -5,8 +5,9 @@ import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
-  const [submission, setSubmission] = useState(FIELDS);
+  const [submission, setSubmission] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
+  // console.log(submission)
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -16,25 +17,32 @@ const Game = () => {
     }
   }).join(' ');
 
+  const updatePoem = (updatedPoem) => {
+    const newFormValues = [];
+
+    submission.forEach((input) => {
+      if (input.key) {
+        return input.placeholder;
+      }
+      else {
+        newFormValues.push(input);
+      }
+    })
+    setSubmission(newFormValues);
+  };
+
   const addSubmissionInput = (input) => {
     const newFormValues = [...submission];
 
     const nextPlayer = currentPlayer + 1;
-    console.log(nextPlayer)
+    // console.log(nextPlayer)
 
     newFormValues.push({
       ...input,    
     });
+    setSubmission(newFormValues);
     setCurrentPlayer(nextPlayer);
-    setSubmission(newFormValues);
-  };
 
-  const updatePoem = (updatedPoem) => {
-    const newFormValues = [];
-
-    newFormValues.push(updatedPoem);
-
-    setSubmission(newFormValues);
   };
 
 
@@ -50,11 +58,11 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      <RecentSubmission  />
+      <RecentSubmission />
 
-      <PlayerSubmissionForm onSubmitCallback={addSubmissionInput} onCurrentPlayer={currentPlayer} />
+      <PlayerSubmissionForm sendSubmission={addSubmissionInput} index={currentPlayer} fields={FIELDS} />
 
-      <FinalPoem submission={submission} onUpdateSubmission={updatePoem}/>
+      <FinalPoem submission={submission}  onUpdatePoem={updatePoem} />
 
     </div>
   );

@@ -28,7 +28,7 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
 
     const poem = fields.map(field => {
       const submittedFields = {...inputFields};
-      if (field.key) {
+      if (inputFields) {
         return submittedFields[field.key]
       }
       else {
@@ -49,13 +49,14 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
   };
 
   return (
-    <div className="PlayerSubmissionForm" onSubmit={onFormSubmit}>
+    <div className="PlayerSubmissionForm">
       <h3>Player Submission Form for Player #{ index }</h3>
 
-      <form className="PlayerSubmissionForm__form" >
+      <form className="PlayerSubmissionForm__form" onSubmit={onFormSubmit}>
 
         <div className="PlayerSubmissionForm__poem-inputs">
-          <h3>The</h3>
+  
+          The
           <label htmlFor="adj1"></label>
           <input 
             name='adj1'
@@ -85,7 +86,7 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
             value={inputFields.verb}
             onChange={onInputChange}
           />
-          <h3>the</h3>
+          the
           <input 
             name='adj2'
             type='text'
@@ -99,13 +100,12 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
             placeholder="noun2"
             value={inputFields.noun2}
             onChange={onInputChange}
-          />
+          />.
           {/* {  }
           <input
             placeholder="hm..."
             type="text" 
           /> */}
-          <h3>.</h3>
 
         </div>
 

@@ -26,17 +26,7 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
   const onFormSubmit = (event) => {
     event.preventDefault();
 
-    const poem = fields.map(field => {
-      const submittedFields = {...inputFields};
-      if (inputFields) {
-        return submittedFields[field.key]
-      }
-      else {
-        return field
-      }
-    }).join(' ');
-
-    sendSubmission(poem);
+    sendSubmission(inputFields);
 
     setInputFields({
       adj1: '',

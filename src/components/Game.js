@@ -7,8 +7,7 @@ import RecentSubmission from './RecentSubmission';
 const Game = () => {
   const [submission, setSubmission] = useState([]);
   const [currentPlayer, setCurrentPlayer] = useState(1);
-  // console.log(submission)
- const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
@@ -21,19 +20,24 @@ const Game = () => {
   const addSubmissionInput = (input) => {
     const newFormValues = [...submission];
 
-    const nextPlayer = currentPlayer + 1;
-    // console.log(nextPlayer)
+    const submittedInput = FIELDS.map((field) => {
+      if (field.key) {
+        return input[field.key]
+      }
+      else {
+        return field
+      }
+    }).join(' ')
 
-    newFormValues.push(input);
-
+    newFormValues.push(submittedInput);
     setSubmission(newFormValues);
-    setCurrentPlayer(nextPlayer);
+    setCurrentPlayer(currentPlayer + 1);
   };
 
   const revealLastSubmission = submission[submission.length - 1]
 
   const revealPoem = () => {
-    setIsSubmitted(true);
+    setSubmitted(true);
   };
 
   return (
@@ -48,11 +52,11 @@ const Game = () => {
         { exampleFormat }
       </p>
 
-      { (isSubmitted) || (submission.length === 0) ? null : <RecentSubmission submission={revealLastSubmission} /> }
+      { (submitted) || (submission.length === 0) ? null : <RecentSubmission submission={revealLastSubmission} /> }
       
-      { isSubmitted ? null : <PlayerSubmissionForm sendSubmission={addSubmissionInput} index={currentPlayer} fields={FIELDS} />}
+      { submitted ? null : <PlayerSubmissionForm sendSubmission={addSubmissionInput} index={currentPlayer} fields={FIELDS} />}
 
-      <FinalPoem isSubmitted={isSubmitted} submissions={submission} revealPoem={revealPoem} />
+      <FinalPoem isSubmitted={submitted} submissions={submission} revealPoem={revealPoem} />
 
     </div>
   );

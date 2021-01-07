@@ -4,8 +4,6 @@ import './FinalPoem.css';
 import Game from './Game';
 
 const FinalPoem = ({isSubmitted, submissions, revealPoem}) => {
-  console.log(submissions)
-
   if (isSubmitted) {
     return (
       <div className="FinalPoem">

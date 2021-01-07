@@ -9,6 +9,8 @@ const Game = () => {
   const [currentPlayer, setCurrentPlayer] = useState(1);
   const [submitted, setSubmitted] = useState(false);
 
+  console.log(submission)
+
   const exampleFormat = FIELDS.map((field) => {
     if (field.key) {
       return field.placeholder;

@@ -19,6 +19,7 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
     const newFormFieldValues = {
       ...inputFields,
     }
+
     newFormFieldValues[name] = value;
     setInputFields(newFormFieldValues);
   };
@@ -36,7 +37,24 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
       adj2: '',
       noun2: '',
     });
-  };
+  }
+
+  const poemFields = fields.map((field, i) => {
+    if (typeof field === 'string') {
+      return (
+        <div key={i}>
+          {field}
+        </div>
+      )
+    }
+    else {
+      return (
+      <div key={i}>
+        <input name={field.key} type='text' placeholder={field.placeholder} value={inputFields[field.key]} onChange={onInputChange} />
+      </div>
+      )
+    }
+  });
 
   return (
     <div className="PlayerSubmissionForm">
@@ -45,7 +63,9 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
       <form className="PlayerSubmissionForm__form" onSubmit={onFormSubmit}>
 
         <div className="PlayerSubmissionForm__poem-inputs">
-          The
+          {poemFields}
+
+          {/* The
           <label htmlFor="adj1"></label>
           <input 
             name='adj1'
@@ -89,7 +109,7 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
             placeholder="noun2"
             value={inputFields.noun2}
             onChange={onInputChange}
-          />.
+          />. */}
           {/* {  }
           <input
             placeholder="hm..."

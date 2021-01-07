@@ -10,9 +10,9 @@ const FinalPoem = ({isSubmitted, submissions, revealPoem}) => {
         <section className="FinalPoem__poem">
           <h3>Final Poem</h3>
           {
-            submissions.map((submission, i) => (
-              <p key={i}>{submission}</p>
-            ))
+            submissions.map((submission, i) => {
+            return <p key={i}>{submission}</p>
+            })
           }
         </section>
       </div>

@@ -58,7 +58,6 @@ const Game = () => {
   );
 }
 
-
 const FIELDS = [
   'The',
   {

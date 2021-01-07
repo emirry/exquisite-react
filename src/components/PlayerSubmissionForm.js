@@ -55,7 +55,6 @@ const PlayerSubmissionForm = ({sendSubmission, index, fields}) => {
       <form className="PlayerSubmissionForm__form" onSubmit={onFormSubmit}>
 
         <div className="PlayerSubmissionForm__poem-inputs">
-  
           The
           <label htmlFor="adj1"></label>
           <input 
